@@ -1,0 +1,61 @@
+version: '3.5'
+
+services:
+# Application
+  xdou-app:
+    build:
+      context: '.'
+      dockerfile: Dockerfile
+      args:
+        uid: ${UID}
+        user: ${USER}
+    restart: always
+    container_name: xdou-app
+    environment:
+      - APACHE_RUN_USER=#${UID}
+      - APACHE_RUN_GROUP=#${UID}
+    volumes:
+      - .:/var/www/html
+    ports:
+      - ${HOST_PORT}:80
+    networks:
+      backend:
+        aliases:
+          - app
+# Database
+  mysql-db:
+    image: mysql:8.0.1
+    restart: always
+    container_name: mysql-db
+    volumes:
+      - ./run/var:/var/lib/mysql
+    #   - ./run/dump/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypassword123
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    networks:
+      backend:
+        aliases:
+          - db
+# phpmyadmin
+  phpmyadmin:
+    depends_on:
+      # Wait for "mysql-db" container to start first
+      - mysql-db
+    image: phpmyadmin/phpmyadmin
+    container_name: xdou-admin
+    restart: always
+    ports:
+      - '8081:80'
+    environment:
+      PMA_HOST: mysql-db
+    networks:
+      backend:
+        aliases:
+          - phpmyadmin
+
+networks:
+  backend:
+    name: backend-network
