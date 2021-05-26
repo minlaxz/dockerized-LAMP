@@ -48,5 +48,5 @@ containerID=$(docker ps -aqf "name=^$containerName")
 scriptDir=$(dirname "$0")
 
 # sed -i 's/CURRENT_CONTAINER=/CURRENT_CONTAINER=\$containerID/' ./dockerenv
-echo "export CURRENT_CONTAINER=$containerID" > "$scriptDir/.dockerenv"
-mv $scriptDir/.dockerenv $HOME/.dockerenv
+echo "export CCID=$containerID" > "$HOME/.laxz/dockerenv"
+

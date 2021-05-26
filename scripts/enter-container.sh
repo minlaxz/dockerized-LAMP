@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker exec -it $CURRENT_CONTAINER bash -c "sudo -u $USER /bin/bash"
+docker exec -it $CCID bash -c "sudo -u $USER /bin/bash"

@@ -3,4 +3,4 @@
 args="$@"
 command="vendor/bin/phpunit $args"
 echo "$command"
-docker exec -it $CURRENT_CONTAINER bash -c "sudo -u $USER /bin/bash -c \"$command\""
+docker exec -it $CCID bash -c "sudo -u $USER /bin/bash -c \"$command\""
