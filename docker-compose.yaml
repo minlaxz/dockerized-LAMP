@@ -1,10 +1,10 @@
-version: '3.5'
+version: "3.5"
 
 services:
-# Application
+  # Application
   xdou-app:
     build:
-      context: '.'
+      context: "."
       dockerfile: Dockerfile
       args:
         uid: ${UID}
@@ -22,7 +22,7 @@ services:
       backend:
         aliases:
           - app
-# Database
+  # Database
   mysql-db:
     image: mysql:8.0.1
     restart: always
@@ -39,7 +39,7 @@ services:
       backend:
         aliases:
           - db
-# phpmyadmin
+  # phpmyadmin
   phpmyadmin:
     depends_on:
       # Wait for "mysql-db" container to start first
@@ -48,7 +48,7 @@ services:
     container_name: xdou-admin
     restart: always
     ports:
-      - '8081:80'
+      - "8081:80"
     environment:
       PMA_HOST: mysql-db
     networks:
