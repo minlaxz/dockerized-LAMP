@@ -1,5 +1,7 @@
 FROM php:7.4.3-apache
 
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+
 RUN apt-get update
 
 # 1. development packages
@@ -18,7 +20,8 @@ RUN apt-get install -y \
     libfreetype6-dev \
     g++ \
     libonig-dev \
-    libzip-dev
+    libzip-dev \
+    nodejs
 
 # 2. apache configs + document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
