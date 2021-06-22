@@ -26,5 +26,5 @@ function warningOutput() {
 read -p "What is container name ? : " containerName
 
 docker build --network host --build-arg user=$USER --build-arg uid=$UID -t minlaxz/composer . && \
-docker run --name $containerName -v $HOME:/var/www/html -it -d --network host minlaxz/composer && \
+docker run --name $containerName -v $HOME/Projects:/var/www/html -it -d --network host minlaxz/composer && \
 descriptionOutput "Your composer' container name is : $containerName"
