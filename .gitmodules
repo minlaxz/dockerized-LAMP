@@ -1,0 +1,3 @@
+[submodule "my-ref-with-update"]
+	path = my-ref-with-update
+	url = git@github.com:minlaxz/php-apache-mysql-containerized.git
